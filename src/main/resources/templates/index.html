@@ -68,6 +68,16 @@
         tr:hover {
             background: #f1f1f1;
         }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -76,6 +86,8 @@
 <div class="container">
 
 <h1>Student Management System</h1>
+
+<div class="error-message" th:if="${error}" th:text="'Error: ' + ${error}"></div>
 
 <form th:action="@{/students}" th:object="${student}" method="post">
 

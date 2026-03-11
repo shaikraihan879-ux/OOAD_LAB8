@@ -24,9 +24,16 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public String addStudent(@ModelAttribute Student student) {
-        studentService.addStudent(student);
-        return "redirect:/";
+    public String addStudent(@ModelAttribute Student student, Model model) {
+        try {
+            studentService.addStudent(student);
+            return "redirect:/";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("students", studentService.getAllStudents());
+            model.addAttribute("student", student);
+            return "index";
+        }
     }
 
     @GetMapping("/api/students")
